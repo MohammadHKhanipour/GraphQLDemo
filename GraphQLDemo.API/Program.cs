@@ -2,6 +2,7 @@ using GraphQLDemo.API.Schema.Mutations;
 using GraphQLDemo.API.Schema.Queries;
 using GraphQLDemo.API.Schema.Subscriptions;
 using GraphQLDemo.API.Services;
+using GraphQLDemo.API.Services.Courses;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -15,6 +16,8 @@ builder.Services.AddInMemorySubscriptions();
 
 string connectionString = builder.Configuration.GetConnectionString("SchoolDbConnection");
 builder.Services.AddPooledDbContextFactory<SchoolDbContext>(options => options.UseSqlite(connectionString));
+
+builder.Services.AddScoped<CoursesRepository>();
 
 var app = builder.Build();
 
